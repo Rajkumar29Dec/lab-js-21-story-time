@@ -1,41 +1,80 @@
-//Trial 1:
-//We've got some basic info about Karen's home
-//Debug the type of data provided
-//Return the types concatenated in a single variable
+const PLAYERS = [
+    "Spiderman",
+    "Captain America",
+    "Wonderwoman",
+    "Popcorn",
+    "Gemwoman",
+    "Bolt",
+    "Antwoman",
+    "Mask",
+    "Tiger",
+    "Captain",
+    "Catwoman",
+    "Fish",
+    "Hulk",
+    "Ninja",
+    "Black Cat",
+    "Volverine",
+    "Thor",
+    "Slayer",
+    "Vader",
+    "Slingo"
+];
 
-//Trial 2:
-//Check if the data given is of the right type
-//parents = String, noOfSiblings = Number, isNuclearFamily = Boolean
+// initialize players with image and strength
+const initPlayers = (players) => {
+    let detailedPlayers = [];
+    
+    // Create players using for loop
+    for (let i = 0; i <players.length;i++)
+    {
+               detailedPlayers[i]={
+                   name: players[i],
+                   strength: getRandomStrength(),
+                   image: "images/super-" + (i + 1) + ".png",
+                   type: (i%2==0)? 'hero' : 'villain'
+               }
 
-//Trial 3:
-//Lily is suspicious about Karen's new friend
-//Karen tells her friend's age and even writes it down
-//Check which one those is not a number (NaN) and return that value
+    }
+    // Type your code here
 
-//Trial 4:
-//Lily gave Karen x sweets
-//Karen ate y sweets herself
-//On her way to the river, she ate another z sweets every n meters travelled
-//Her friend divided the remaining sweets into 2 parts for each
-//How many sweets did her friend get to eat?
+    return detailedPlayers;
+}
 
-//Trial 5:
-//As Lily moves closer, it gets colder. She checks the temperature on her mobile
-//It only shows in fahrenheit. Convert the data to celsius and return it.
+// getting random strength
+const getRandomStrength = () => {
+    // Return a random integer (0,100]
+    // Note: You can use Math.random() and Math.ceil()
+    var strength=Math.random();
+    return Math.ceil(strength);
+}
 
-//Trial 6:
-//Lily can now do multiple things to deal with this
-//1. Take her daughter to a doctor
-//2. Talk to her husband about it
-//3. Counsel her daughter herself
-//4. Lock her daughter in her room
-//Given a value, return which of these above actions Lily would take
+const buildPlayers = (players, type) => {
+    let fragment = '';
 
-//Challenge 1:
-//Lily realized that she'd hurt her daughter
-//All she wants now is for her to stop crying
-//She refuses to talk to her but Lily doesn't stop trying
-//She tries out multiple things hoping for the best
-//Take all of Lily's strategies and concatenate them to a single var
-//Seperate the strategies by a single space
-//Return the length of the complete strategy
+    // Loop through players and accumulate HTML template
+    // depending of type of player(hero|villain)
+    // Type your code here
+    for(let i=0;i<players.length;i++){
+        fragment=
+            `<div class="player">
+   <img src="${players[i].image}" alt="">
+   <div class="name">${players[i].name}</div>
+   <div class="strength">${players[i].strength}</div>
+</div>`
+    }
+
+
+    return fragment;
+}
+// Display players in HTML
+const viewPlayers = (players) => {
+
+    document.getElementById('heroes').innerHTML = buildPlayers(players, 'hero');
+    document.getElementById('villains').innerHTML = buildPlayers(players, 'villain');
+
+}
+
+window.onload = () => {
+    viewPlayers(initPlayers(PLAYERS));
+}
